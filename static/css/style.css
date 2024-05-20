@@ -1,0 +1,181 @@
+/* Body styling */
+body {
+    background: linear-gradient(to bottom, #111111, #2a2a2a); /* Dark gradient background */
+    color: #e0e0e0; /* Light text color */
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Navbar styling */
+.navbar {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.navbar-brand img {
+    height: 40px; /* Adjust the height as necessary */
+    width: auto; /* Maintain the aspect ratio */
+}
+
+.navbar-text {
+    font-size: 1.5rem;
+    color: #e0e0e0 !important;
+    font-weight: 700;
+}
+
+.navbar-nav .nav-link {
+    font-size: 1.1rem;
+    color: #e0e0e0 !important;
+}
+
+/* Container styling */
+.container {
+    margin-top: 50px;
+}
+
+/* Jumbotron styling */
+.jumbotron {
+    background-color: #1e1e1e; /* Dark background for the jumbotron */
+    padding: 2rem 2rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.jumbotron h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #f5f5f5; /* Light color for the text */
+}
+
+.jumbotron p {
+    font-size: 1.25rem;
+    color: #b0b0b0; /* Slightly lighter color for the paragraph text */
+}
+
+/* Button styling */
+.btn-primary, .btn-secondary, .btn-lg, .btn-outline-golden {
+    background-color: #C8AE6A; /* Golden color */
+    border: none;
+    border-radius: 50px;
+    padding: 10px 20px;
+    font-size: 1.25rem;
+    transition: all 0.3s ease;
+    color: white;
+    font-weight: bold;
+    margin: 5px; /* Add margin between buttons */
+}
+
+.btn-primary:hover, .btn-secondary:hover, .btn-outline-golden:hover {
+    background-color: #ba9a45; /* Slightly darker golden on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px);
+}
+
+/* Outline button styling */
+.btn-outline-golden {
+    color: #C8AE6A;
+    border: 2px solid #C8AE6A;
+    background-color: transparent;
+}
+
+.btn-outline-golden:hover {
+    color: #000000;
+    background-color: #C8AE6A;
+    border-color: #C8AE6A;
+}
+
+.btn-outline-golden.btn-sm {
+    font-size: 1rem; /* Smaller font size for smaller buttons */
+}
+
+/* Footer styling */
+.footer {
+    padding: 20px 0;
+    background-color: #111111;
+}
+
+/* Input styling */
+input[type="text"], input[type="password"], textarea {
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #555;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+/* List group item styling */
+.list-group-item {
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #555;
+    margin-bottom: 10px;
+}
+
+/* Spinner styling */
+#spinner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    width: 100px; /* Adjust the width as needed */
+    height: 100px; /* Adjust the height as needed */
+}
+
+#spinner img {
+    width: 100%;
+    height: 100%;
+}
+
+/* Scrollable content styling */
+.scrollable-content {
+    max-height: 400px; /* Adjust the height as needed */
+    overflow-y: auto;
+}
+
+/* Table styling */
+.table-responsive {
+    border: 2px solid #C8AE6A;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.table {
+    border-color: #C8AE6A;
+}
+
+.table thead th {
+    border-bottom: 2px solid #C8AE6A;
+}
+
+.table tbody td {
+    border-color: #C8AE6A;
+}
+
+.table-dark {
+    background-color: #111111;
+    color: #e0e0e0;
+}
+
+.table-dark th, .table-dark td, .table-dark thead th {
+    border-color: #C8AE6A;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(200, 174, 106, 0.05); /* Golden striped rows */
+}
+
+.table-striped tbody tr:hover {
+    background-color: rgba(200, 174, 106, 0.15); /* Golden hover effect */
+}
+
+/* Delete icon styling */
+.delete-summary i {
+    color: red;
+    cursor: pointer;
+}
+
+.delete-summary i:hover {
+    color: darkred;
+}

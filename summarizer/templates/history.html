@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>History</h1>
+        <button id="delete-history" class="btn btn-outline-golden">Delete History</button>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-dark table-striped">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Summary</th>
+                    <th>Date and Time</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if summaries %}
+                    {% for summary in summaries %}
+                        <tr>
+                            <td>
+                                {% if summary.document %}
+                                    {{ summary.document.title }}
+                                {% elif summary.text_entry %}
+                                    {{ summary.text_entry.title }}
+                                {% elif summary.url_entry %}
+                                    {{ summary.url_entry.title }}
+                                {% endif %}
+                            </td>
+                            <td>{{ summary.summary_text|truncatewords:50 }}</td>
+                            <td>{{ summary.created_at }}</td>
+                            <td>
+                                <a href="{% url 'summary_detail' summary.id %}" class="btn btn-outline-golden btn-sm">View Full Summary</a>
+                                <button class="btn btn-outline-golden btn-sm delete-summary" data-id="{{ summary.id }}">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="4" class="text-center">No summaries found.</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const deleteHistoryButton = document.getElementById('delete-history');
+    deleteHistoryButton.addEventListener('click', function() {
+        if (confirm('Are you sure you want to delete the entire history?')) {
+            fetch('{% url "delete_history" %}', {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    window.location.reload();
+                } else {
+                    alert('Failed to delete history.');
+                }
+            });
+        }
+    });
+
+    const deleteButtons = document.querySelectorAll('.delete-summary');
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const summaryId = this.getAttribute('data-id');
+            if (confirm('Are you sure you want to delete this summary?')) {
+                fetch(`/delete_summary/${summaryId}/`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.reload();
+                    } else {
+                        alert('Failed to delete summary.');
+                    }
+                });
+            }
+        });
+    });
+});
+</script>
+{% endblock %}

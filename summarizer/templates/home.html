@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="jumbotron">
+    {% if user.is_authenticated %}
+        <h1 class="display-4">Welcome, {{ user.username }}!</h1>
+        <p class="lead">Summarize your documents, text, or articles easily with our AI-powered tool.</p>
+        <p>Our state-of-the-art summarization technology helps you convert lengthy documents into concise summaries, saving you time and effort. Whether you are a student, professional, or researcher, PolyGlot Pulse makes it easy to understand complex information quickly.</p>
+        <div class="d-flex justify-content-center">
+            <a class="btn btn-gold btn-lg mx-2" href="{% url 'upload' %}" role="button">Upload Document</a>
+            <a class="btn btn-gold btn-lg mx-2" href="{% url 'enter_text' %}" role="button">Enter Text</a>
+            <a class="btn btn-gold btn-lg mx-2" href="{% url 'enter_url' %}" role="button">Enter URL</a>
+        </div>
+    {% else %}
+        <h1 class="display-4">Welcome to PolyGlot Pulse!</h1>
+        <p class="lead">Summarize your documents, text, or articles easily with our AI-powered tool.</p>
+        <p>Our state-of-the-art summarization technology helps you convert lengthy documents into concise summaries, saving you time and effort. Whether you are a student, professional, or researcher, PolyGlot Pulse makes it easy to understand complex information quickly. Sign up or log in to get started and experience the future of document summarization.</p>
+        <a class="btn btn-primary btn-lg" href="{% url 'signup' %}" role="button">Sign Up</a>
+        <a class="btn btn-secondary btn-lg" href="{% url 'login' %}" role="button">Login</a>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="jumbotron text-center">
+        <h1>
+            Summary of 
+            {% if summary.document %}
+                {{ summary.document.title }}
+            {% elif summary.text_entry %}
+                {{ summary.text_entry.title }}
+            {% elif summary.url_entry %}
+                {{ summary.url_entry.title }}
+            {% endif %}
+        </h1>
+        <hr class="my-4">
+        <div class="scrollable-content" style="max-height: 400px; overflow-y: auto;">
+            <p>{{ summary.summary_text }}</p>
+        </div>
+        <p><strong>Word Count:</strong> {{ summary.word_count }}</p>
+        <p><strong>Tone:</strong> {{ summary.tone|title }}</p> <!-- This will capitalize the first letter -->
+        <a href="{% url 'history' %}" class="btn btn-primary">Back to History</a>
+    </div>
+</div>
+{% endblock %}

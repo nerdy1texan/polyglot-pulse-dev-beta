@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="jumbotron text-center">
+        <h1 class="display-4">
+            {% if document %}
+                Summarize Document
+            {% elif text_entry %}
+                Summarize Text
+            {% elif url_entry %}
+                Summarize Article
+            {% endif %}
+        </h1>
+        <form id="summary-form" method="post" action="">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary btn-lg">Generate Summary</button>
+        </form>
+        <div id="spinner" class="spinner-border text-primary" role="status" style="display:none;">
+            <img src="{% static 'images/robot_spinner.gif' %}" alt="Loading...">
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("summary-form");
+    const spinner = document.getElementById("spinner");
+    const submitButton = form.querySelector('button[type="submit"]');
+
+    form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        const formData = new FormData(form);
+
+        submitButton.disabled = true;
+        spinner.style.display = "block";
+
+        fetch(form.action, {
+            method: "POST",
+            body: formData,
+            headers: {
+                "X-Requested-With": "XMLHttpRequest",
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                window.location.href = data.redirect;
+            } else {
+                spinner.style.display = "none";
+                submitButton.disabled = false;
+                alert("There was an error generating the summary.");
+            }
+        })
+        .catch(error => {
+            spinner.style.display = "none";
+            submitButton.disabled = false;
+            console.error("Error:", error);
+            alert("There was an error generating the summary.");
+        });
+    });
+});
+</script>
+{% endblock %}
