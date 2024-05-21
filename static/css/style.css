@@ -3,6 +3,9 @@ body {
     background: linear-gradient(to bottom, #111111, #2a2a2a); /* Dark gradient background */
     color: #e0e0e0; /* Light text color */
     font-family: 'Roboto', sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 /* Navbar styling */
@@ -31,6 +34,11 @@ body {
     margin-top: 50px;
 }
 
+/* Header font styling */
+h1, .h1, .display-4 {
+    font-size: 2.5rem; /* Adjusted font size */
+}
+
 /* Jumbotron styling */
 .jumbotron {
     background-color: #1e1e1e; /* Dark background for the jumbotron */
@@ -41,7 +49,7 @@ body {
 }
 
 .jumbotron h1 {
-    font-size: 3rem;
+    font-size: 2.5rem; /* Adjusted font size */
     font-weight: 700;
     color: #f5f5f5; /* Light color for the text */
 }
@@ -52,7 +60,7 @@ body {
 }
 
 /* Button styling */
-.btn-primary, .btn-secondary, .btn-lg, .btn-outline-golden {
+.btn-primary, .btn-secondary, .btn-lg, .btn-outline-golden, .btn-golden {
     background-color: #C8AE6A; /* Golden color */
     border: none;
     border-radius: 50px;
@@ -64,7 +72,7 @@ body {
     margin: 5px; /* Add margin between buttons */
 }
 
-.btn-primary:hover, .btn-secondary:hover, .btn-outline-golden:hover {
+.btn-primary:hover, .btn-secondary:hover, .btn-outline-golden:hover, .btn-golden:hover {
     background-color: #ba9a45; /* Slightly darker golden on hover */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     transform: translateY(-2px);
@@ -87,21 +95,62 @@ body {
     font-size: 1rem; /* Smaller font size for smaller buttons */
 }
 
+.btn-outline-golden.btn-copy {
+    font-size: 1.25rem; /* Adjust font size for copy button */
+    padding: 10px 15px; /* Adjust padding for copy button */
+}
+
 /* Footer styling */
 .footer {
     padding: 20px 0;
     background-color: #111111;
+    margin-top: auto; /* Push footer to the bottom */
+    margin-bottom: 20px; /* Add margin to bring the logo up */
+}
+
+.footer img {
+    margin-top: -20px; /* Move the logo a bit up */
 }
 
 /* Input styling */
-input[type="text"], input[type="password"], textarea {
-    background-color: #333;
-    color: #fff;
-    border: 1px solid #555;
-    padding: 10px;
-    border-radius: 5px;
-    width: 100%;
-    margin-bottom: 15px;
+input[type="text"], input[type="number"], input[type="password"], input[type="url"], textarea, select {
+    background-color: #333; /* Gray background */
+    color: #fff; /* White text color */
+    border: 1px solid #555; /* Darker gray border */
+    padding: 10px; /* Padding inside the text box */
+    border-radius: 5px; /* Rounded corners */
+    width: 100%; /* Full width */
+    margin-bottom: 15px; /* Space below each text box */
+}
+
+/* Form field styling */
+.form-group label {
+    color: #fff; /* White color for labels */
+    font-weight: bold; /* Bold labels */
+}
+
+.form-control {
+    background-color: #333; /* Gray background */
+    color: #fff; /* White text color */
+    border: 1px solid #555; /* Darker gray border */
+    padding: 10px; /* Padding inside the text box */
+    border-radius: 5px; /* Rounded corners */
+    width: 100%; /* Full width */
+    margin-bottom: 15px; /* Space below each text box */
+    text-align: left; /* Ensure text alignment is left */
+}
+
+/* Align forms to the left */
+form {
+    text-align: left;
+    max-width: 500px; /* Max width for forms */
+    margin: 0 auto; /* Center form on the page */
+}
+
+/* Center buttons */
+form button {
+    display: block;
+    margin: 0 auto;
 }
 
 /* List group item styling */
@@ -143,6 +192,7 @@ input[type="text"], input[type="password"], textarea {
 
 .table {
     border-color: #C8AE6A;
+    text-align: center; /* Center align text in table */
 }
 
 .table thead th {

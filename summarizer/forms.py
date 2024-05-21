@@ -23,6 +23,10 @@ class UrlForm(forms.ModelForm):
     class Meta:
         model = UrlEntry
         fields = ['title', 'url']
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'url': forms.URLInput(attrs={'class': 'form-control'}),
+        }
 
 class SummaryForm(forms.Form):
     word_count = forms.IntegerField(label='Word Count')

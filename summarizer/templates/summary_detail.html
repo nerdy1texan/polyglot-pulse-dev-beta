@@ -3,23 +3,43 @@
 {% block content %}
 <div class="container">
     <div class="jumbotron text-center">
-        <h1>
-            Summary of 
-            {% if summary.document %}
-                {{ summary.document.title }}
-            {% elif summary.text_entry %}
-                {{ summary.text_entry.title }}
-            {% elif summary.url_entry %}
-                {{ summary.url_entry.title }}
-            {% endif %}
-        </h1>
+        <div class="d-flex justify-content-between align-items-start">
+            <h1 class="mr-auto">
+                Summary of 
+                {% if summary.document %}
+                    {{ summary.document.title }}
+                {% elif summary.text_entry %}
+                    {{ summary.text_entry.title }}
+                {% elif summary.url_entry %}
+                    {{ summary.url_entry.title }}
+                {% endif %}
+            </h1>
+            <button id="copy-summary" class="btn btn-outline-golden btn-copy">
+                <i class="fas fa-copy"></i>
+            </button>
+        </div>
         <hr class="my-4">
         <div class="scrollable-content" style="max-height: 400px; overflow-y: auto;">
-            <p>{{ summary.summary_text }}</p>
+            <p id="summary-text">{{ summary.summary_text }}</p>
         </div>
         <p><strong>Word Count:</strong> {{ summary.word_count }}</p>
         <p><strong>Tone:</strong> {{ summary.tone|title }}</p> <!-- This will capitalize the first letter -->
         <a href="{% url 'history' %}" class="btn btn-primary">Back to History</a>
     </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const copyButton = document.getElementById('copy-summary');
+    const summaryText = document.getElementById('summary-text').innerText;
+
+    copyButton.addEventListener('click', function() {
+        navigator.clipboard.writeText(summaryText).then(function() {
+            alert('Summary copied to clipboard!');
+        }, function(err) {
+            alert('Failed to copy text: ', err);
+        });
+    });
+});
+</script>
 {% endblock %}

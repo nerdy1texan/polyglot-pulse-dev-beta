@@ -3,6 +3,9 @@ body {
     background: linear-gradient(to bottom, #111111, #2a2a2a); /* Dark gradient background */
     color: #e0e0e0; /* Light text color */
     font-family: 'Roboto', sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 /* Navbar styling */
@@ -29,6 +32,7 @@ body {
 /* Container styling */
 .container {
     margin-top: 50px;
+    text-align: center;
 }
 
 /* Jumbotron styling */
@@ -83,21 +87,52 @@ body {
     border-color: #C8AE6A;
 }
 
+.btn-outline-golden.btn-sm {
+    font-size: 1rem; /* Smaller font size for smaller buttons */
+}
+
+.btn-outline-golden.btn-copy {
+    font-size: 1.25rem; /* Adjust font size for copy button */
+    padding: 10px 15px; /* Adjust padding for copy button */
+}
+
 /* Footer styling */
 .footer {
     padding: 20px 0;
     background-color: #111111;
+    margin-top: auto; /* Push footer to the bottom */
+    margin-bottom: 20px; /* Add margin to bring the logo up */
+}
+
+.footer img {
+    margin-top: -20px; /* Move the logo a bit up */
 }
 
 /* Input styling */
-input[type="text"], input[type="password"], textarea {
-    background-color: #333;
-    color: #fff;
-    border: 1px solid #555;
-    padding: 10px;
-    border-radius: 5px;
-    width: 100%;
-    margin-bottom: 15px;
+input[type="text"], input[type="number"], input[type="password"], input[type="url"], textarea, select {
+    background-color: #333; /* Gray background */
+    color: #fff; /* White text color */
+    border: 1px solid #555; /* Darker gray border */
+    padding: 10px; /* Padding inside the text box */
+    border-radius: 5px; /* Rounded corners */
+    width: 100%; /* Full width */
+    margin-bottom: 15px; /* Space below each text box */
+}
+
+/* Form field styling */
+.form-group label {
+    color: #fff; /* White color for labels */
+    font-weight: bold; /* Bold labels */
+}
+
+.form-control {
+    background-color: #333; /* Gray background */
+    color: #fff; /* White text color */
+    border: 1px solid #555; /* Darker gray border */
+    padding: 10px; /* Padding inside the text box */
+    border-radius: 5px; /* Rounded corners */
+    width: 100%; /* Full width */
+    margin-bottom: 15px; /* Space below each text box */
 }
 
 /* List group item styling */
@@ -139,6 +174,7 @@ input[type="text"], input[type="password"], textarea {
 
 .table {
     border-color: #C8AE6A;
+    text-align: center; /* Center align text in table */
 }
 
 .table thead th {
