@@ -12,6 +12,7 @@
                 <tr>
                     <th>Title</th>
                     <th>Summary</th>
+                    <th>Tone</th> <!-- Added Tone column -->
                     <th style="width: 15%;">Date and Time</th> <!-- Adjusted width -->
                     <th>Actions</th>
                 </tr>
@@ -30,6 +31,7 @@
                                 {% endif %}
                             </td>
                             <td>{{ summary.summary_text|truncatewords:50 }}</td>
+                            <td>{{ summary.tone }}</td> <!-- Added Tone data -->
                             <td>{{ summary.created_at }}</td>
                             <td>
                                 <a href="{% url 'summary_detail' summary.id %}" class="btn btn-outline-golden btn-sm">View Full Summary</a>
@@ -41,7 +43,7 @@
                     {% endfor %}
                 {% else %}
                     <tr>
-                        <td colspan="4" class="text-center">No summaries found.</td>
+                        <td colspan="5" class="text-center">No summaries found.</td> <!-- Adjusted colspan -->
                     </tr>
                 {% endif %}
             </tbody>

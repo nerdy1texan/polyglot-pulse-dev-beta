@@ -32,7 +32,11 @@ body {
 /* Container styling */
 .container {
     margin-top: 50px;
-    text-align: center;
+}
+
+/* Header font styling */
+h1, .h1, .display-4 {
+    font-size: 2.5rem; /* Adjusted font size */
 }
 
 /* Jumbotron styling */
@@ -45,7 +49,7 @@ body {
 }
 
 .jumbotron h1 {
-    font-size: 3rem;
+    font-size: 2.5rem; /* Adjusted font size */
     font-weight: 700;
     color: #f5f5f5; /* Light color for the text */
 }
@@ -56,7 +60,7 @@ body {
 }
 
 /* Button styling */
-.btn-primary, .btn-secondary, .btn-lg, .btn-outline-golden {
+.btn-primary, .btn-secondary, .btn-lg, .btn-outline-golden, .btn-golden {
     background-color: #C8AE6A; /* Golden color */
     border: none;
     border-radius: 50px;
@@ -68,7 +72,7 @@ body {
     margin: 5px; /* Add margin between buttons */
 }
 
-.btn-primary:hover, .btn-secondary:hover, .btn-outline-golden:hover {
+.btn-primary:hover, .btn-secondary:hover, .btn-outline-golden:hover, .btn-golden:hover {
     background-color: #ba9a45; /* Slightly darker golden on hover */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     transform: translateY(-2px);
@@ -133,6 +137,20 @@ input[type="text"], input[type="number"], input[type="password"], input[type="ur
     border-radius: 5px; /* Rounded corners */
     width: 100%; /* Full width */
     margin-bottom: 15px; /* Space below each text box */
+    text-align: left; /* Ensure text alignment is left */
+}
+
+/* Align forms to the left */
+form {
+    text-align: left;
+    max-width: 500px; /* Max width for forms */
+    margin: 0 auto; /* Center form on the page */
+}
+
+/* Center buttons */
+form button {
+    display: block;
+    margin: 0 auto;
 }
 
 /* List group item styling */

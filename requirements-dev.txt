@@ -10,3 +10,6 @@ python-dotenv
 textract
 requests
 beautifulsoup4
+python-pptx
+openpyxl
+python-docx

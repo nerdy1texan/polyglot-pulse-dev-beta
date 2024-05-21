@@ -6,6 +6,9 @@ from .forms import DocumentForm, SummaryForm, TextForm, UrlForm
 import openai
 from django.conf import settings
 import PyPDF2
+from pptx import Presentation
+import pandas as pd
+import docx  # Add this import for handling Word documents
 from django.http import JsonResponse, HttpResponse
 import requests
 from bs4 import BeautifulSoup
@@ -121,14 +124,63 @@ def summarize_url(request, url_id):
         form = SummaryForm()
     return render(request, 'summarize.html', {'form': form, 'url_entry': url_entry})
 
-def generate_summary(file_path, word_count, tone):
-    # Implement file reading and summarization logic using OpenAI API
-    with open(file_path, 'rb') as f:
-        reader = PyPDF2.PdfReader(f)
-        text = ''
-        for page in reader.pages:
-            text += page.extract_text()
+def extract_text_from_pdf(file_path):
+    try:
+        text = ""
+        with open(file_path, "rb") as f:
+            reader = PyPDF2.PdfReader(f)
+            for page in reader.pages:
+                text += page.extract_text()
+        return text
+    except PdfReadError:
+        return "The uploaded PDF file is corrupted or cannot be read."
 
+def extract_text_from_pptx(file_path):
+    text = ""
+    presentation = Presentation(file_path)
+    for slide in presentation.slides:
+        for shape in slide.shapes:
+            if hasattr(shape, "text"):
+                text += shape.text + " "
+    return text
+
+def extract_text_from_excel(file_path):
+    text = ""
+    xls = pd.ExcelFile(file_path)
+    for sheet_name in xls.sheet_names:
+        df = pd.read_excel(file_path, sheet_name=sheet_name)
+        text += df.to_string(index=False) + " "
+    return text
+
+def extract_text_from_docx(file_path):
+    doc = docx.Document(file_path)
+    text = ""
+    for paragraph in doc.paragraphs:
+        text += paragraph.text + " "
+    return text
+
+def extract_text_from_txt(file_path):
+    with open(file_path, 'r') as file:
+        text = file.read()
+    return text
+
+def generate_summary(file_path, word_count, tone):
+    if file_path.lower().endswith('.pdf'):
+        text = extract_text_from_pdf(file_path)
+    elif file_path.lower().endswith('.pptx'):
+        text = extract_text_from_pptx(file_path)
+    elif file_path.lower().endswith('.xlsx'):
+        text = extract_text_from_excel(file_path)
+    elif file_path.lower().endswith('.docx'):
+        text = extract_text_from_docx(file_path)
+    elif file_path.lower().endswith('.txt'):
+        text = extract_text_from_txt(file_path)
+    else:
+        return "Unsupported file type."
+    
+    if text.startswith("The uploaded PDF file is corrupted") or text == "Unsupported file type.":
+        return text
+    
     # Generate summary using OpenAI API
     response = openai.ChatCompletion.create(
         model="gpt-4-turbo",
@@ -136,7 +188,7 @@ def generate_summary(file_path, word_count, tone):
             {"role": "system", "content": f"Summarize the following text in {word_count} words with a {tone} tone."},
             {"role": "user", "content": text}
         ],
-        max_tokens=1500  # Updated to allow up to 1500 tokens
+        max_tokens=1500
     )
     summary = response.choices[0].message['content'].strip()
     return summary
@@ -149,7 +201,7 @@ def generate_text_summary(text, word_count, tone):
             {"role": "system", "content": f"Summarize the following text in {word_count} words with a {tone} tone."},
             {"role": "user", "content": text}
         ],
-        max_tokens=1500  # Updated to allow up to 1500 tokens
+        max_tokens=1500
     )
     summary = response.choices[0].message['content'].strip()
     return summary
